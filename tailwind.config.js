@@ -7,6 +7,8 @@ export default {
         'primary': '#16121E',
         'secondary': '#27203D',
         'accent': '#8043F9',
+        'red': '#D43A4C',
+        'green': '#01E2A6',
         'test': '#FF0000'
       },
       fontFamily: {
