@@ -34,6 +34,15 @@ export default function Signup() {
 
   const handleSignup = async (e) => {
     e.preventDefault()
+    if (userSignup.password.length < 6) {
+      setSubmitNotification(prevValue => {return{
+        show: true,
+        msg: "Your password is too short"
+      }})
+      return
+    }
+
+
     if (userSignup.password !== userSignup.confirmpassword) {
       setSubmitNotification(prevValue => {return {
         show: true,
@@ -63,7 +72,12 @@ export default function Signup() {
       }})
       } catch (error) {
           let errorMsg = error.message
-          console.log(errorMsg)
+          if (errorMsg === "Firebase: Error (auth/email-already-in-use).") {
+            setSubmitNotification(prevValue => {return{
+              show: true,
+              msg: "Email already in use."
+            }})
+          }
       }
     }
   }
@@ -96,7 +110,6 @@ export default function Signup() {
             <input value={userSignup.confirmpassword} name='confirmpassword' onChange={handleInput} className='h-10 w-[350px] rounded-xl text-black pl-2' type='password' autoComplete="off" required></input>
           </div>
           <div className="g-recaptcha mb-6 -mt-3" data-sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} data-theme="dark"></div>
-          <script src="https://www.google.com/recaptcha/api.js" async defer></script>
           <button className='bg-accent w-[300px] h-12 rounded-2xl text-lg'>Sign Up</button>
         </form>
       </div>
