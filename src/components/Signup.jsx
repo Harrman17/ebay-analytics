@@ -1,8 +1,9 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState } from 'react'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '/src/firebase.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
 
 
 
@@ -87,7 +88,7 @@ export default function Signup() {
 
   return (
     <div className='h-screen flex justify-center items-center text-white font-poppins'>
-      <div className='bg-secondary h-[600px] w-[530px] rounded-2xl'>
+      <div className='sm:bg-secondary h-[600px] w-[530px] rounded-2xl overflow-hidden'>
         <form onSubmit={handleSignup} className='flex flex-col items-center justify-center'>
           <h1 className='text-3xl mt-7 mb-5 font-medium'>Create Account</h1>
           {submitNotification.show &&
@@ -110,7 +111,8 @@ export default function Signup() {
             <input value={userSignup.confirmpassword} name='confirmpassword' onChange={handleInput} className='h-10 w-[350px] rounded-xl text-black pl-2' type='password' autoComplete="off" required></input>
           </div>
           <div className="g-recaptcha mb-6 -mt-3" data-sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} data-theme="dark"></div>
-          <button className='bg-accent w-[300px] h-12 rounded-2xl text-lg'>Sign Up</button>
+          <button className='bg-accent w-[300px] h-12 rounded-2xl text-lg mb-5'>Sign Up</button>
+          <p>Already have an account? <Link to='/Login' className='underline text-accent'>Log In</Link></p>
         </form>
       </div>
     </div>
