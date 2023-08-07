@@ -19,9 +19,11 @@ export default function Login() {
 
   return (
     <div>
-      <img className='ml-3 mt-3 h-[100px] absolute' src='/ebayanalyticscut.png'></img>
-      <div className='h-screen flex justify-center items-center text-white font-poppins'>
-        <div className='bg-secondary h-[550px] w-[530px] rounded-2xl overflow-hidden p-5'>
+      <div className='flex justify-center h-24 p-0 mt-6 sm:justify-start sm:ml-3 sm:mt-0'>
+        <img className='h-[120px]' src='/ebayanalyticscut.png'></img>
+      </div>
+      <div className='h-screen flex justify-center items-center text-white font-poppins -mt-24'>
+        <div className='sm:bg-secondary h-[550px] w-[530px] rounded-2xl overflow-hidden p-5'>
           <form className='flex flex-col items-center justify-center'>
             <h1 className='text-3xl mb-5 font-medium'>Welcome Back!</h1>
             <div className='mb-6'>
