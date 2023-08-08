@@ -1,11 +1,20 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '/src/firebase.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faX } from '@fortawesome/free-solid-svg-icons'
  
 export default function Login() {
 
   const [userLogin,setUserLogin] = useState({
     email: "",
     password: ""
+  })
+
+  const [submitNotification,setSubmitNotifaction] = useState({
+    show: false,
+    msg: ""
   })
 
   function handleInput(e) {
@@ -16,16 +25,48 @@ export default function Login() {
   }
 
 
+  const handleLogin = async (e) => {
+    e.preventDefault(e)
+    if (userLogin.password.length < 6) {
+        setSubmitNotifaction(prevValue => {return {
+          show: true,
+          msg: "Your password is too short"
+        }})
+    } else if (grecaptcha.getResponse() == "") {
+        setSubmitNotifaction(prevValue => {return{
+          show: true,
+          msg: "Please complete the reCaptcha!"
+        }})
+    } else {
+      try {
+        const user = await signInWithEmailAndPassword(
+          auth,
+          userLogin.email,
+          userLogin.password
+        )
+        console.log(user)
+      } catch(error) {
+        console.log(error)
+      }
+    } 
+  }
+
+
 
   return (
     <div>
-      <div className='flex justify-center h-24 p-0 mt-6 sm:justify-start sm:ml-3 sm:mt-0'>
-        <img className='h-[120px]' src='/ebayanalyticscut.png'></img>
+      <div className='flex justify-start items-center w-full h-24 p-4 absolute top-5 left-0'>
+        <img className='h-28 hidden sm:inline-block' src='/ebayanalyticscut.png'></img>
       </div>
-      <div className='h-screen flex justify-center items-center text-white font-poppins -mt-24'>
+      <div className='h-screen flex justify-center items-center text-white font-poppins'>
         <div className='sm:bg-secondary h-[550px] w-[530px] rounded-2xl overflow-hidden p-5'>
-          <form className='flex flex-col items-center justify-center'>
+          <form className='flex flex-col items-center justify-center' onSubmit={handleLogin}>
             <h1 className='text-3xl mb-5 font-medium'>Welcome Back!</h1>
+            {submitNotification.show &&
+            <div className='bg-red w-[350px] h-10 rounded-md mb-4 flex flex-row items-center p-3'>
+              <FontAwesomeIcon icon={faX} className='h-3 mr-4 mt-0.5 cursor-pointer' onClick={() => setSubmitNotification(prevValue => {return{...prevValue, show: false}})}/>
+              <p className='text-lg'>{submitNotification.msg}</p>
+            </div>}
             <div className='mb-6'>
             <label className='text-lg block'>Email Address</label>
             <input autoComplete='off' name='email' type='email' className='h-10 w-[350px] rounded-xl text-black pl-2 font-medium'  onChange={handleInput}></input>
