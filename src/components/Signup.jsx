@@ -89,7 +89,7 @@ export default function Signup() {
   return (
     <div>
       <div className='flex justify-start items-center w-full h-24 p-4 absolute top-5 left-0'>
-        <img className='h-28' src='/ebayanalyticscut.png'></img>
+        <img className='h-28 hidden sm:inline-block' src='/ebayanalyticscut.png'></img>
       </div>
       <div className='h-screen flex justify-center items-center text-white font-poppins'>
         <div className='sm:bg-secondary h-[600px] w-[530px] rounded-2xl sm:overflow-hidden'>
