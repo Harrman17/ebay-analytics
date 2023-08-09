@@ -12,7 +12,7 @@ export default function Login() {
     password: ""
   })
 
-  const [submitNotification,setSubmitNotifaction] = useState({
+  const [submitNotification,setSubmitNotification] = useState({
     show: false,
     msg: ""
   })
@@ -28,12 +28,12 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault(e)
     if (userLogin.password.length < 6) {
-        setSubmitNotifaction(prevValue => {return {
+      setSubmitNotification(prevValue => {return {
           show: true,
           msg: "Your password is too short"
         }})
     } else if (grecaptcha.getResponse() == "") {
-        setSubmitNotifaction(prevValue => {return{
+      setSubmitNotification(prevValue => {return{
           show: true,
           msg: "Please complete the reCaptcha!"
         }})
@@ -45,8 +45,23 @@ export default function Login() {
           userLogin.password
         )
         console.log(user)
+        setUserLogin(prevInput => {return{
+          email: "",
+          password: ""
+        }})
       } catch(error) {
         console.log(error)
+        if (error == "FirebaseError: Firebase: Error (auth/user-not-found).") {
+          setSubmitNotification(prevValue => {return {
+            show: true,
+            msg: "Your account does not exist."
+          }})
+        } else if (error == "FirebaseError: Firebase: Error (auth/wrong-password).") {
+          setSubmitNotification(preValue => {return{
+            show: true,
+            msg: "Your password is incorrect"
+          }})
+        }
       }
     } 
   }
@@ -69,11 +84,11 @@ export default function Login() {
             </div>}
             <div className='mb-6'>
             <label className='text-lg block'>Email Address</label>
-            <input autoComplete='off' name='email' type='email' className='h-10 w-[350px] rounded-xl text-black pl-2 font-medium'  onChange={handleInput}></input>
+            <input value={userLogin.email} autoComplete='off' name='email' type='email' className='h-10 w-[350px] rounded-xl text-black pl-2 font-medium'  onChange={handleInput}></input>
             </div>
             <div className='mb-9'>
             <label className='text-lg block'>Password</label>
-            <input autoComplete='off' name='password' type='password' className='h-10 w-[350px] rounded-xl text-black pl-2 font-medium' onChange={handleInput}></input>
+            <input value={userLogin.password} autoComplete='off' name='password' type='password' className='h-10 w-[350px] rounded-xl text-black pl-2 font-medium' onChange={handleInput}></input>
             </div>
             <div className="g-recaptcha mb-6 -mt-3" data-sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} data-theme="dark"></div>
             <button className='bg-accent w-[300px] h-12 rounded-2xl text-lg mb-5'>Log In</button>
