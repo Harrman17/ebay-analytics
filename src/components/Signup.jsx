@@ -97,8 +97,8 @@ export default function Signup() {
             <h1 className='text-3xl mt-7 mb-5 font-medium'>Create Account</h1>
             {submitNotification.show &&
             <div className='bg-red w-[350px] h-10 rounded-md mb-4 flex flex-row items-center p-3'>
-            <FontAwesomeIcon icon={faX} className='h-3 mr-4 mt-0.5 cursor-pointer' onClick={() => setSubmitNotification(prevValue => {return{...prevValue, show: false}})}/>
-            <p className='text-lg'>{submitNotification.msg}</p>
+              <FontAwesomeIcon icon={faX} className='h-3 mr-4 mt-0.5 cursor-pointer' onClick={() => setSubmitNotification(prevValue => {return{...prevValue, show: false}})}/>
+              <p className='text-lg'>{submitNotification.msg}</p>
             </div>}
             <div className='mb-6'>
               <label className='ml-1 text-lg block'>Email Address</label>
