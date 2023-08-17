@@ -1,8 +1,10 @@
 import React from 'react'
 import './index.css'
-import Signup from './components/Signup'
-import Login from './components/Login'
 import { Routes, Route } from 'react-router-dom'
+import Signup from './pages/Signup'
+import Login from './pages/Login'
+import Start from './pages/Start'
+
 
 export default function App() {
   return (
@@ -10,6 +12,7 @@ export default function App() {
       <Routes>
         <Route path='/' element={<Signup />} />
         <Route path='/Login' element={<Login />} />
+        <Route path='/Getting-Started' element={<Start />} />
       </Routes>
     </div>
   )

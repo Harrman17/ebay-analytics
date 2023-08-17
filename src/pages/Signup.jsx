@@ -3,7 +3,8 @@ import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '/src/firebase.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
 
 
 
@@ -18,9 +19,8 @@ export default function Signup() {
   const [submitNotification,setSubmitNotification] = useState({
     show: false,
     msg: ""
-  })
- 
-  
+  }) // notification for any responses from requests e.g form submition
+
   
   function handleInput(e) {
     setUserSignup(prevInput => {
@@ -31,7 +31,7 @@ export default function Signup() {
     })
   }
 
-
+  const navigate = useNavigate()
 
   const handleSignup = async (e) => {
     e.preventDefault()
@@ -61,16 +61,18 @@ export default function Signup() {
         userSignup.email,
         userSignup.password
       ) 
-      console.log(user)
       setUserSignup(prevInput => {return {
         email: "",
         password: "",
         confirmpassword: ""
-      }})
+      }}) // so form inputs go blank once it is submitted
       setSubmitNotification(prevValue => {return{
         ...prevValue,
         show: false
       }})
+      if (user) {
+        navigate("/Getting-Started")
+      }
       } catch (error) {
           let errorMsg = error.message
           if (errorMsg === "Firebase: Error (auth/email-already-in-use).") {
@@ -82,8 +84,6 @@ export default function Signup() {
       }
     }
   }
-
-
 
 
   return (
