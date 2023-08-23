@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '/src/firebase.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,7 +15,7 @@ export default function Login() {
   const [submitNotification,setSubmitNotification] = useState({
     show: false,
     msg: ""
-  })
+  }) // notification for any responses from requests e.g form submition
 
   function handleInput(e) {
     setUserLogin(prevInput => {return {
@@ -24,6 +24,7 @@ export default function Login() {
     }})
   }
 
+  const navigate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault(e)
@@ -44,11 +45,13 @@ export default function Login() {
           userLogin.email,
           userLogin.password
         )
-        console.log(user)
         setUserLogin(prevInput => {return{
           email: "",
           password: ""
-        }})
+        }}) // so form inputs are blank once it is submitted
+        if (user) {
+          navigate("/Getting-Started")
+        }
       } catch(error) {
         console.log(error)
         if (error == "FirebaseError: Firebase: Error (auth/user-not-found).") {
