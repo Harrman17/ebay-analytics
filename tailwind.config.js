@@ -6,6 +6,7 @@ export default {
       colors: {
         'primary': '#16121E',
         'secondary': '#27203D',
+        'hoversecondary': '#403367',
         'accent': '#8043F9',
         'red': '#D43A4C',
         'green': '#01E2A6',
