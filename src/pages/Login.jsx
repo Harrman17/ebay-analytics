@@ -28,12 +28,7 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault(e)
-    if (userLogin.password.length < 6) {
-      setSubmitNotification(prevValue => {return {
-          show: true,
-          msg: "Your password is too short"
-        }})
-    } else if (grecaptcha.getResponse() == "") {
+    if (grecaptcha.getResponse() == "") {
       setSubmitNotification(prevValue => {return{
           show: true,
           msg: "Please complete the reCaptcha!"
@@ -57,12 +52,17 @@ export default function Login() {
         if (error == "FirebaseError: Firebase: Error (auth/user-not-found).") {
           setSubmitNotification(prevValue => {return {
             show: true,
-            msg: "Your account does not exist."
+            msg: "User does not exist."
           }})
         } else if (error == "FirebaseError: Firebase: Error (auth/wrong-password).") {
-          setSubmitNotification(preValue => {return{
+          setSubmitNotification(prevValue => {return{
             show: true,
-            msg: "Your password is incorrect"
+            msg: "Your email/password is incorrect"
+          }})
+        } else if (error == "FirebaseError: Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).") {
+          setSubmitNotification(prevValue => {return {
+            show: true,
+            msg: "User blocked, please try again later"
           }})
         }
       }
