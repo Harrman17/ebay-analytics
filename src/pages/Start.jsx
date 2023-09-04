@@ -1,11 +1,11 @@
 // start page after signing up/logging in
 // from this page onwards it is not responsive as this is intented to be used on desktop anyways
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloudArrowUp, faX } from '@fortawesome/free-solid-svg-icons'
-
-
+import { auth } from '/src/firebase.js'
+import { useNavigate } from 'react-router-dom'
 
 export default function Start() {
 
@@ -15,6 +15,19 @@ export default function Start() {
     msg: ""
   })
 
+  const navigate = useNavigate()
+
+  const handleUser = () => {
+    if (auth.currentUser == null) {
+      console.log("user not found")
+      navigate('/')
+    }
+  }
+
+  useEffect(() => {
+    handleUser()
+  } , []) // runs once when the page is loaded
+  
 
 
   const handleDrag = (e) => {
@@ -67,7 +80,7 @@ export default function Start() {
               <label htmlFor='file-input' className='h-full'>
                 <div onDragOver={handleDrag} onDragLeave={handleDrag} onDrop={handleDrop} onClick={handleClick} className={`${dragActive ? 'bg-hoversecondary' : 'bg-secondary'} flex flex-col items-center justify-center w-[700px] h-[370px] rounded-2xl border-solid border-black border-2 cursor-pointer hover:bg-hoversecondary`}>
                   <FontAwesomeIcon icon={faCloudArrowUp} className='h-12 mb-4'/>
-                  <button className='text-2xl'>Choose the csv file to upload</button>
+                  <p className='text-2xl'>Choose the csv file to upload</p>
                 </div>
               </label>
             </form>
