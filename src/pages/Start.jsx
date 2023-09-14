@@ -5,9 +5,10 @@ import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloudArrowUp, faX } from '@fortawesome/free-solid-svg-icons'
 import { auth } from '/src/firebase.js'
+import { setPersistence, browserSessionPersistence, signInWithEmailAndPassword } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 
-export default function Start() {
+export default function Start({userLogin}) {
 
   const [dragActive,setDragActive] = useState(false)
   const [submitNotification,setSubmitNotification] = useState({
@@ -16,18 +17,12 @@ export default function Start() {
   })
 
   const navigate = useNavigate()
-
   const handleUser = () => {
     if (auth.currentUser == null) {
       console.log("user not found")
       navigate('/')
     }
   }
-
-  useEffect(() => {
-    handleUser()
-  } , []) // runs once when the page is loaded
-  
 
 
   const handleDrag = (e) => {
@@ -38,7 +33,7 @@ export default function Start() {
       setDragActive(false)
     }
   }
-//checks for specifically 1 file in the data transfer object array
+
   const handleDrop = (e) => {
     e.preventDefault()
     e.stopPropagation() //prevents bubbling
@@ -46,20 +41,24 @@ export default function Start() {
 
     const droppedFile = e.dataTransfer.files
 
-    if (!droppedFile[0].type.match('csv')) { 
+    if (!droppedFile[0].type.match('csv')) {  
       setSubmitNotification(prevValue => {return{
         show: true,
         msg: "Please make sure you are uploading a .csv file"
       }})
-    } else if (droppedFile && droppedFile.length == 1) {
+    } else if (droppedFile && droppedFile.length == 1) { //checks for specifically 1 file in the data transfer object array
       console.log('one csv file was dropped')
     }
   }
 
+
+
   const handleClick = (e) => {
-    if (e.target.files && e.target.files.length == 1) {
-      console.log("one file was selected")
-    } 
+    const clickedFile = e.target.files // file uploaded using normal click method
+    console.log(clickedFile)
+    if (!clickedFile.type.match('csv')) {
+      console.log("not csv mate")
+    }
   }
 
 

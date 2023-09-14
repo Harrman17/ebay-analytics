@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '/src/firebase.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,13 +8,16 @@ import { Link, useNavigate } from 'react-router-dom'
 
 
 
-export default function Signup() {
+export default function Signup({ userSignup, setUserSignup }) {
 
-  const [userSignup, setUserSignup] = useState({
-    email: "",
-    password: "",
-    confirmpassword: ""
-  })
+
+  useEffect(() => {
+    if (typeof grecaptcha !== 'undefined') {
+      grecaptcha.ready(() => {
+        grecaptcha.render('Signup-reCaptcha')
+      })
+    }
+  },[])
 
   const [submitNotification,setSubmitNotification] = useState({
     show: false,
@@ -114,7 +117,7 @@ export default function Signup() {
               </div>
               <input value={userSignup.confirmpassword} name='confirmpassword' onChange={handleInput} className='h-10 w-[350px] rounded-xl text-black pl-2' type='password' autoComplete="off" required></input>
             </div>
-            <div className="g-recaptcha mb-6 -mt-3" data-sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} data-theme="dark"></div>
+            <div id='Signup-reCaptcha' className="g-recaptcha mb-6 -mt-3" data-sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} data-theme="dark"></div>
             <button className='bg-accent w-[300px] h-12 rounded-2xl text-lg mb-5'>Sign Up</button>
             <p>Already have an account? <Link to='/Login' className='underline text-accent'>Log In</Link></p>
           </form>

@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '/src/firebase.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
  
-export default function Login() {
+export default function Login({ userLogin, setUserLogin }) {
 
-  const [userLogin,setUserLogin] = useState({
-    email: "",
-    password: ""
-  })
+  useEffect(() => {
+    if (typeof grecaptcha !== 'undefined') {
+      grecaptcha.ready(() => {
+        grecaptcha.render('Login-reCaptcha')
+      })
+    }
+  },[])
+
 
   const [submitNotification,setSubmitNotification] = useState({
     show: false,
@@ -93,7 +97,7 @@ export default function Login() {
             <label className='text-lg block'>Password</label>
             <input value={userLogin.password} autoComplete='off' name='password' type='password' className='h-10 w-[350px] rounded-xl text-black pl-2 font-medium' onChange={handleInput}></input>
             </div>
-            <div className="g-recaptcha mb-6 -mt-3" data-sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} data-theme="dark"></div>
+            <div id='Login-reCaptcha' className="g-recaptcha mb-6 -mt-3" data-sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} data-theme="dark"></div>
             <button className='bg-accent w-[300px] h-12 rounded-2xl text-lg mb-5'>Log In</button>
             <p>Don't have an account? <Link to='/' className='underline text-accent'>Sign Up</Link></p>
           </form>
