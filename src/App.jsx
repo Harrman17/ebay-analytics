@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Start from './pages/Start'
+import { onAuthStateChanged, getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence } from 'firebase/auth'
 
 export default function App() {
 
@@ -19,6 +20,19 @@ export default function App() {
     password: ""
   })
   
+  onAuthStateChanged(getAuth(), (user) => {
+    if (user) { //if logged in
+      setPersistence(getAuth, browserSessionPersistence)
+      .then(() => {
+        return signInWithEmailAndPassword(getAuth, userLogin.email, userLogin.password)
+      })
+      .catch((error) => {
+        console.log(error.code)
+        console.log(error.message)
+      })
+    }
+  })
+
 
   return (
     <div>

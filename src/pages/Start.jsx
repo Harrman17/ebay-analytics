@@ -5,7 +5,6 @@ import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloudArrowUp, faX } from '@fortawesome/free-solid-svg-icons'
 import { auth } from '/src/firebase.js'
-import { setPersistence, browserSessionPersistence, signInWithEmailAndPassword } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 
 export default function Start({userLogin}) {
