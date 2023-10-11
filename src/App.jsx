@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './index.css'
 import { Routes, Route } from 'react-router-dom'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Start from './pages/Start'
-import { onAuthStateChanged, getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence } from 'firebase/auth'
+
 
 export default function App() {
 
@@ -19,20 +19,8 @@ export default function App() {
     email: "",
     password: ""
   })
-  
-  onAuthStateChanged(getAuth(), (user) => {
-    if (user) { //if logged in
-      setPersistence(getAuth, browserSessionPersistence)
-      .then(() => {
-        return signInWithEmailAndPassword(getAuth, userLogin.email, userLogin.password)
-      })
-      .catch((error) => {
-        console.log(error.code)
-        console.log(error.message)
-      })
-    }
-  })
-
+ 
+  //we're scrapping all this authentication shit now lets move onto using papaparse and getting this dashboard setup, no point in wasting time in this broken project, need to move on. ALL PROJECTS WON'T BE PERFECT
 
   return (
     <div>

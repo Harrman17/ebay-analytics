@@ -9,7 +9,7 @@ export default {
         'hoversecondary': '#403367',
         'accent': '#8043F9',
         'red': '#D43A4C',
-        'green': '#01E2A6',
+        'green': '#109672',
         'test': '#FF0000'
       },
       fontFamily: {
