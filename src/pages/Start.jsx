@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloudArrowUp, faX } from '@fortawesome/free-solid-svg-icons'
-
+import Papa from 'papaparse'
 
 export default function Start({userLogin}) {
 
@@ -44,6 +44,13 @@ export default function Start({userLogin}) {
   }
 
 
+  function testingParse(result) {
+    console.log(result)
+    setFileUpload(prevValue => {return{
+      uploaded: true
+    }})
+  }
+
   const handleClickUpload = (e) => {
     const selectedFile = e.target.files[0]
     if (selectedFile) {
@@ -53,10 +60,9 @@ export default function Start({userLogin}) {
           msg: "Please make sure you are uploading a .csv file"
         }})
       } else {
-        console.log(selectedFile)
-        setFileUpload({
-          uploaded: true
-        })
+        console.log(Papa.parse(selectedFile, {
+          complete: testingParse
+        }))
         setSubmitNotification({
           show: true,
           msg: "File uploaded successfully"
