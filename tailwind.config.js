@@ -12,6 +12,10 @@ module.exports = {
     transparent: "transparent",
     current: "currentColor",
     extend: {
+      screens: {
+        'screen1': '1536px',
+        'screen2': '1920px'
+      },
       colors: {
         'primary': '#16121E',
         'secondary': '#27203D',
