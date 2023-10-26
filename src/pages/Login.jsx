@@ -79,9 +79,14 @@ export default function Login({ userLogin, setUserLogin }) {
     <div>
       <div className='flex justify-start items-center w-full h-24 p-4 absolute top-5 left-0'>
         <img className='h-28 hidden sm:inline-block' src='/ebayanalyticscut.png'></img>
+        <Link to='/Dashboard' className='justify-end bg-secondary p-4 rounded-2xl text-white ml-auto mr-8 hover:bg-hoversecondary'>
+          <button onClick={() => {console.log("button working")}}>
+            Skip to test the dashboard
+          </button>
+        </Link>
       </div>
       <div className='h-screen flex justify-center items-center text-white font-poppins'>
-        <div className='sm:bg-secondary h-[550px] w-[530px] rounded-2xl overflow-hidden p-5'>
+        <div className='sm:bg-secondary h-[530px] w-[530px] rounded-2xl overflow-hidden p-5'>
           <form className='flex flex-col items-center justify-center' onSubmit={handleLogin}>
             <h1 className='text-3xl mb-5 font-medium'>Welcome Back!</h1>
             {submitNotification.show &&
