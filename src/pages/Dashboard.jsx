@@ -1,5 +1,6 @@
 import React from 'react'
-import { LineChart, Card, Metric, Text, Title, Col, Grid } from '@tremor/react'
+import { LineChart, Card, Metric, Text, Title, Col, Grid, BadgeDelta, Flex } from '@tremor/react'
+
 
 export default function Dashboard() {
 
@@ -54,24 +55,52 @@ export default function Dashboard() {
     },
   ];
 
+    const leftCards = {
+        title: "2023 Revenue",
+        metric: "£42,170.21",
+        metricPrev: "£39,874.78",
+        delta: "+7.66%",
+        deltaType: "moderateIncrease",
+      }
+
+
+
   const valueFormatter = (number) => `£ ${new Intl.NumberFormat("us").format(number).toString()}` 
 
   return (
-    <div >
+    <div className='dark'>
       <div className='h-screen grid grid-cols-2 grid-rows-2'>
-        <Grid numItems={2} className='gap-4 p-10'>
-            <Col numColSpan={1}>
+        <Grid numItems={4} className='gap-10 p-16'>
+          <Col numColSpan={2}>
               <Card decoration='left' decorationColor='violet'>
-                <Text>2023 Revenue</Text>
-                <Metric>£42,170.21</Metric>
+                <Flex alignItems='start'>
+                  <Text>{leftCards.title}</Text>
+                  <BadgeDelta deltaType={leftCards.deltaType}>{leftCards.delta}</BadgeDelta>
+                </Flex>
+                <Flex justifyContent='start' alignItems='baseline' className='truncate space-x-6"'>
+                  <Metric>{leftCards.metric}</Metric>
+                  <Text className='truncate ml-2'>from {leftCards.metricPrev}</Text>
+                </Flex>
               </Card>
-            </Col>
-            <Col>
+          </Col> 
+            <Col numColSpan={2}>
               <Card decoration='left' decorationColor='violet'>
-                  <Text>2023 Sales</Text>
-                  <Metric>983</Metric>
+                  <Text>2023 Orders</Text>
+                  <Metric>1543</Metric>
                 </Card>
               </Col>
+            <Col numColSpan={2}>
+              <Card decoration='left' decorationColor='violet'>
+                <Text>2023 Avg Sale Price</Text>
+                <Metric>£31.49</Metric>
+              </Card>
+            </Col>
+            <Col numColSpan={2}>
+              <Card decoration='left' decorationColor='violet'>
+                <Text>2023 Sold via Promoted Listing</Text>
+                <Metric>12.4%</Metric>
+              </Card>
+            </Col>
         </Grid>
         <div className='flex justify-center p-4'>
           <Card className='w-11/12'>
