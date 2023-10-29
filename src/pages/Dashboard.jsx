@@ -1,5 +1,5 @@
 import React from 'react'
-import { LineChart, Card, Metric, Text, Title, Col, Grid, BadgeDelta, Flex } from '@tremor/react'
+import { LineChart, Card, Metric, Text, Title, Col, Grid, BadgeDelta, Flex, DonutChart } from '@tremor/react'
 
 
 export default function Dashboard() {
@@ -63,14 +63,67 @@ export default function Dashboard() {
         deltaType: "moderateIncrease",
       }
 
+    const donutChartData = [
+        {
+          SKU: "B003TL048U",
+          Sales: 155,
+        },
+        {
+          SKU: "B07LGDFR1X",
+          Sales: 245,
+        },
+        {
+          SKU: "B08FTBNNY2",
+          Sales: 120,
+        },
+        {
+          SKU: "B08FC3KV21",
+          Sales: 75,
+        },
+        {
+          SKU: "B07W4DGVQF",
+          Sales: 90,
+        },
+        {
+          SKU: "B001G7P62S",
+          Sales: 70,
+        },
+        {
+          SKU: "B08319XH53",
+          Sales: 50,
+        },
+        {
+          SKU: "B07V9G9F3M",
+          Sales: 80,
+        },
+        {
+          SKU: "B09YTNP6JV",
+          Sales: 120,
+        },
+        {
+          SKU: "B01DJVVORE",
+          Sales: 138,
+        },
+      ];
 
+  
 
   const valueFormatter = (number) => `£ ${new Intl.NumberFormat("us").format(number).toString()}` 
+
+  let maxcurrSales = 0
+  const donutValueFormatter = () => {
+    for (const item of donutChartData) {
+      if (item.Sales > maxcurrSales) {
+        maxcurrSales = item.Sales
+        return item.SKU
+      }
+    }
+    }  
 
   return (
     <div className='dark'>
       <div className='h-screen grid grid-cols-2 grid-rows-2'>
-        <Grid numItems={4} className='gap-10 p-16'>
+        <Grid numItems={4} className='gap-10 p-12'>
           <Col numColSpan={2}>
               <Card decoration='left' decorationColor='violet'>
                 <Flex alignItems='start'>
@@ -115,6 +168,21 @@ export default function Dashboard() {
               yAxisWidth={55}
             />
           </Card>
+        </div>
+        <div className='pl-12'>
+          <Grid numItems={2}>
+            <Card className='p-8'>
+              <Title>Top performing SKUs</Title>
+                <DonutChart 
+                className='mt-6 h-60'
+                data={donutChartData}  
+                category='Sales'
+                index='SKU'
+                colors={["purple","cyan","teal","rose","indigo","pink","violet","amber","fuchsia","sky"]}
+                valueFormatter={donutValueFormatter}
+                />
+            </Card>
+          </Grid>
         </div>
       </div>
     </div>
