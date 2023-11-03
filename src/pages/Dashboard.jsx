@@ -1,5 +1,6 @@
 import React from 'react'
-import { LineChart, Card, Metric, Text, Title, Col, Grid, BadgeDelta, Flex, DonutChart } from '@tremor/react'
+import { LineChart, Card, Metric, Text, Title, Col, Grid, BadgeDelta, Flex, DonutChart, TabGroup, BarChart  } from '@tremor/react'
+import { barChartData } from './barChartData';
 
 
 export default function Dashboard() {
@@ -106,7 +107,6 @@ export default function Dashboard() {
         },
       ];
 
-  
 
   const valueFormatter = (number) => `£ ${new Intl.NumberFormat("us").format(number).toString()}` 
 
@@ -169,12 +169,12 @@ export default function Dashboard() {
             />
           </Card>
         </div>
-        <div className='pl-12'>
-          <Grid numItems={2}>
-            <Card className='p-8'>
+        <div className='p-12'>
+          <Grid numItems={2} className=''>
+            <Card className=''>
               <Title>Top performing SKUs</Title>
                 <DonutChart 
-                className='mt-6 h-60'
+                className='mt-6 screen2:h-60'
                 data={donutChartData}  
                 category='Sales'
                 index='SKU'
@@ -183,6 +183,17 @@ export default function Dashboard() {
                 />
             </Card>
           </Grid>
+        </div>
+        <div className='flex justify-center p-4'>
+          <Card className='w-11/12'>
+            <Title>2023 Daily Sales</Title>
+            <BarChart 
+            className='h-64 screen2:h-[360px]'
+            data={barChartData}
+            categories={["Jan"]}
+            colors={"violet"}
+            valueFormatter={valueFormatter}/>
+          </Card>
         </div>
       </div>
     </div>
