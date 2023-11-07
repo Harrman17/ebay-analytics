@@ -1,36 +1,126 @@
-export const barChartData = [{
-    month: "Jan",
-    daily_revenue: {
-        "01": 100.12,
-        "02": 85.67, 
-        "03": 112.45,
-        "04": 98.23, 
-        "05": 123.56,
-        "06": 75.34, 
-        "07": 110.78,
-        "08": 90.45, 
-        "09": 80.67, 
-        "10": 70.89, 
-        "11": 135.78,
-        "12": 92.34, 
-        "13": 104.56,
-        "14": 119.12,
-        "15": 88.45, 
-        "16": 97.34, 
-        "17": 103.45,
-        "18": 94.67, 
-        "19": 79.23, 
-        "20": 123.45,
-        "21": 85.67, 
-        "22": 100.12,
-        "23": 67.89, 
-        "24": 109.12,
-        "25": 95.34, 
-        "26": 111.56,
-        "27": 96.78, 
-        "28": 110.45,
-        "29": 81.23, 
-        "30": 76.78, 
-        "31": 94.45  
-    }
-}]
+export const barChartData = [
+    {
+      name: "01",
+      "Daily Revenue": 100.12,
+    },
+    {
+      name: "02",
+      "Daily Revenue": 85.67,
+    },
+    {
+      name: "03",
+      "Daily Revenue": 112.45,
+    },
+    {
+      name: "04",
+      "Daily Revenue": 98.23,
+    },
+    {
+      name: "05",
+      "Daily Revenue": 123.56,
+    },
+    {
+      name: "06",
+      "Daily Revenue": 75.34,
+    },
+    {
+      name: "07",
+      "Daily Revenue": 110.78,
+    },
+    {
+      name: "08",
+      "Daily Revenue": 90.45,
+    },
+    {
+      name: "09",
+      "Daily Revenue": 80.67,
+    },
+    {
+      name: "10",
+      "Daily Revenue": 70.89,
+    },
+    {
+      name: "11",
+      "Daily Revenue": 135.78,
+    },
+    {
+      name: "12",
+      "Daily Revenue": 92.34,
+    },
+    {
+      name: "13",
+      "Daily Revenue": 104.56,
+    },
+    {
+      name: "14",
+      "Daily Revenue": 119.12,
+    },
+    {
+      name: "15",
+      "Daily Revenue": 88.45,
+    },
+    {
+      name: "16",
+      "Daily Revenue": 97.34,
+    },
+    {
+      name: "17",
+      "Daily Revenue": 103.45,
+    },
+    {
+      name: "18",
+      "Daily Revenue": 94.67,
+    },
+    {
+      name: "19",
+      "Daily Revenue": 79.23,
+    },
+    {
+      name: "20",
+      "Daily Revenue": 123.45,
+    },
+    {
+      name: "21",
+      "Daily Revenue": 85.67,
+    },
+    {
+      name: "22",
+      "Daily Revenue": 100.12,
+    },
+    {
+      name: "23",
+      "Daily Revenue": 67.89,
+    },
+    {
+      name: "24",
+      "Daily Revenue": 109.12,
+    },
+    {
+      name: "25",
+      "Daily Revenue": 95.34,
+    },
+    {
+      name: "26",
+      "Daily Revenue": 111.56,
+    },
+    {
+      name: "27",
+      "Daily Revenue": 96.78,
+    },
+    {
+      name: "28",
+      "Daily Revenue": 110.45,
+    },
+    {
+      name: "29",
+      "Daily Revenue": 81.23,
+    },
+    {
+      name: "30",
+      "Daily Revenue": 76.78,
+    },
+    {
+      name: "31",
+      "Daily Revenue": 94.45,
+    },
+];

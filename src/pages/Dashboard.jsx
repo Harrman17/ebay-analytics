@@ -8,51 +8,51 @@ export default function Dashboard() {
   const chartdata = [
     {
       month: "Jan",
-      "revenue": 3123.11  
+      "Revenue": 3123.11  
     },
     {
       month: "Feb",
-      "revenue": 3476.87
+      "Revenue": 3476.87
     },
     {
       month: "March",
-      "revenue": 2913.90
+      "Revenue": 2913.90
     },
     {
       month: "April",
-      "revenue": 3364.43
+      "Revenue": 3364.43
     },
     {
       month: "May",
-      "revenue": 2164.02
+      "Revenue": 2164.02
     },
     {
       month: "June",
-      "revenue": 3901.34
+      "Revenue": 3901.34
     },
     {
       month: "July",
-      "revenue": 4064.11
+      "Revenue": 4064.11
     },
     {
       month: "Aug",
-      "revenue": 4104.52
+      "Revenue": 4104.52
     },
     {
       month: "Sept",
-      "revenue": 3564.32
+      "Revenue": 3564.32
     },
     {
       month: "Oct",
-      "revenue": 3864.12
+      "Revenue": 3864.12
     },
     {
       month: "Nov",
-      "revenue": 3900.41
+      "Revenue": 3900.41
     },
     {
       month: "Dec",
-      "revenue": 4402.98
+      "Revenue": 4402.98
     },
   ];
 
@@ -162,16 +162,17 @@ export default function Dashboard() {
               className='h-64 screen2:h-[360px]'
               data={chartdata}
               index="month"
-              categories={["revenue"]}
+              categories={["Revenue"]}
               colors={["violet"]}
               valueFormatter={valueFormatter}
               yAxisWidth={55}
+              showAnimation={true}
             />
           </Card>
         </div>
         <div className='p-12'>
-          <Grid numItems={2} className=''>
-            <Card className=''>
+          <Grid numItems={2}>
+            <Card >
               <Title>Top performing SKUs</Title>
                 <DonutChart 
                 className='mt-6 screen2:h-60'
@@ -180,6 +181,7 @@ export default function Dashboard() {
                 index='SKU'
                 colors={["purple","cyan","teal","rose","indigo","pink","violet","amber","fuchsia","sky"]}
                 valueFormatter={donutValueFormatter}
+                showAnimation={true}
                 />
             </Card>
           </Grid>
@@ -190,9 +192,11 @@ export default function Dashboard() {
             <BarChart 
             className='h-64 screen2:h-[360px]'
             data={barChartData}
-            categories={["Jan"]}
-            colors={"violet"}
-            valueFormatter={valueFormatter}/>
+            index="name"
+            categories={["Daily Revenue"]}
+            colors={["violet"]}
+            valueFormatter={valueFormatter}
+            showAnimation={true}/>
           </Card>
         </div>
       </div>
