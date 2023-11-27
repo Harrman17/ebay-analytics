@@ -1,5 +1,5 @@
 import React from 'react'
-import { LineChart, Card, Metric, Text, Title, Col, Grid, BadgeDelta, Flex, DonutChart, TabGroup, BarChart  } from '@tremor/react'
+import { LineChart, Card, Metric, Text, Title, Col, Grid, BadgeDelta, Flex, DonutChart, BarChart, TabGroup, TabList, Tab, TabPanels, TabPanel} from '@tremor/react'
 import { barChartData } from './barChartData';
 
 
@@ -155,7 +155,7 @@ export default function Dashboard() {
               </Card>
             </Col>
         </Grid>
-        <div className='flex justify-center p-4'>
+        <div className='flex justify-center p-1 pt-2'>
           <Card className='w-11/12'>
             <Title>2023 Total Monthly Revenue</Title>
             <LineChart 
@@ -173,11 +173,11 @@ export default function Dashboard() {
         <div className='p-12'>
           <Grid numItems={2}>
             <Card >
-              <Title>Top performing SKUs</Title>
+              <Title>Top Performing SKUs</Title>
                 <DonutChart 
                 className='mt-6 screen2:h-60'
                 data={donutChartData}  
-                category='Sales'
+                category="Sales"
                 index='SKU'
                 colors={["purple","cyan","teal","rose","indigo","pink","violet","amber","fuchsia","sky"]}
                 valueFormatter={donutValueFormatter}
@@ -186,20 +186,42 @@ export default function Dashboard() {
             </Card>
           </Grid>
         </div>
-        <div className='flex justify-center p-4'>
+        <div className='flex justify-center p-1 mb-1'>
           <Card className='w-11/12'>
             <Title>2023 Daily Sales</Title>
-            <BarChart 
-            className='h-64 screen2:h-[360px]'
-            data={barChartData}
-            index="name"
-            categories={["Daily Revenue"]}
-            colors={["violet"]}
-            valueFormatter={valueFormatter}
-            showAnimation={true}/>
+            <TabGroup>
+              <TabList>
+                <Tab>Jan</Tab>
+                <Tab>Feb</Tab>
+                <Tab>March</Tab>
+                <Tab>April</Tab>
+                <Tab>May</Tab>
+                <Tab>June</Tab>
+                <Tab>July</Tab>
+                <Tab>Aug</Tab>
+                <Tab>Sept</Tab>
+                <Tab>Oct</Tab>
+                <Tab>Nov</Tab>
+                <Tab>Dec</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel>
+                  <BarChart 
+                  className='h-64 screen2:h-[360px]'
+                  data={barChartData}
+                  index="name"
+                  categories={["Daily Revenue"]}
+                  colors={["violet"]}
+                  valueFormatter={valueFormatter}
+                  showAnimation={true}/>
+                </TabPanel>
+              </TabPanels>
+            </TabGroup>
           </Card>
         </div>
       </div>
     </div>
   )
 }
+
+
