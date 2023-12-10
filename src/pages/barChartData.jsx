@@ -1,7 +1,7 @@
 export const barChartData = [
     {
       name: "01",
-      "Daily Revenue": 100.12,
+      "Daily Revenue": 100.22,
     },
     {
       name: "02",

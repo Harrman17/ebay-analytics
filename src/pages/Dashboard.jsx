@@ -1,5 +1,5 @@
-import React from 'react'
-import { LineChart, Card, Metric, Text, Title, Col, Grid, BadgeDelta, Flex, DonutChart, BarChart, TabGroup, TabList, Tab, TabPanels, TabPanel} from '@tremor/react'
+import React, { useState } from 'react'
+import { LineChart, Card, Metric, Text, Title, Col, Grid, BadgeDelta, Flex, DonutChart, BarChart, TabGroup, TabList, Tab, TabPanels, TabPanel, ProgressBar, TextInput} from '@tremor/react'
 import { barChartData } from './barChartData';
 
 
@@ -120,6 +120,12 @@ export default function Dashboard() {
     }
     }  
 
+    const [revGoal, setrevGoal] = useState('')
+
+    const handleInputText = (e) => {
+      setrevGoal(e.target.value)
+    }
+
   return (
     <div className='dark'>
       <div className='h-screen grid grid-cols-2 grid-rows-2'>
@@ -184,6 +190,14 @@ export default function Dashboard() {
                 showAnimation={true}
                 />
             </Card>
+            <Card>
+                <Flex>
+                  <Text>{leftCards.metric}</Text>
+                  <Text>£{revGoal}</Text>
+                </Flex>
+                <ProgressBar color='purple'/>
+                <TextInput placeholder='Set your goal' type='text' value={revGoal} onChange={handleInputText}/>
+            </Card>
           </Grid>
         </div>
         <div className='flex justify-center p-1 mb-1'>
@@ -205,7 +219,117 @@ export default function Dashboard() {
                 <Tab>Dec</Tab>
               </TabList>
               <TabPanels>
+                <TabPanel> {/*each tab panel is in order - so first tab is Jan then Feb etc..*/}
+                  <BarChart 
+                  className='h-64 screen2:h-[360px]'
+                  data={barChartData}
+                  index="name"
+                  categories={["Daily Revenue"]}
+                  colors={["violet"]}
+                  valueFormatter={valueFormatter}
+                  showAnimation={true}/>
+                </TabPanel>
                 <TabPanel>
+                  <BarChart 
+                  className='h-64 screen2:h-[360px]'
+                  data={barChartData}
+                  index="name"
+                  categories={["Daily Revenue"]}
+                  colors={["violet"]}
+                  valueFormatter={valueFormatter}
+                  showAnimation={true}/>
+                </TabPanel>
+                <TabPanel>
+                  <BarChart 
+                  className='h-64 screen2:h-[360px]'
+                  data={barChartData}
+                  index="name"
+                  categories={["Daily Revenue"]}
+                  colors={["violet"]}
+                  valueFormatter={valueFormatter}
+                  showAnimation={true}/>
+                </TabPanel>
+                <TabPanel>
+                  <BarChart 
+                  className='h-64 screen2:h-[360px]'
+                  data={barChartData}
+                  index="name"
+                  categories={["Daily Revenue"]}
+                  colors={["violet"]}
+                  valueFormatter={valueFormatter}
+                  showAnimation={true}/>
+                </TabPanel>
+                <TabPanel> 
+                  <BarChart 
+                  className='h-64 screen2:h-[360px]'
+                  data={barChartData}
+                  index="name"
+                  categories={["Daily Revenue"]}
+                  colors={["violet"]}
+                  valueFormatter={valueFormatter}
+                  showAnimation={true}/>
+                </TabPanel>
+                <TabPanel>
+                  <BarChart 
+                  className='h-64 screen2:h-[360px]'
+                  data={barChartData}
+                  index="name"
+                  categories={["Daily Revenue"]}
+                  colors={["violet"]}
+                  valueFormatter={valueFormatter}
+                  showAnimation={true}/>
+                </TabPanel>
+                <TabPanel>
+                  <BarChart 
+                  className='h-64 screen2:h-[360px]'
+                  data={barChartData}
+                  index="name"
+                  categories={["Daily Revenue"]}
+                  colors={["violet"]}
+                  valueFormatter={valueFormatter}
+                  showAnimation={true}/>
+                </TabPanel>
+                <TabPanel>
+                  <BarChart 
+                  className='h-64 screen2:h-[360px]'
+                  data={barChartData}
+                  index="name"
+                  categories={["Daily Revenue"]}
+                  colors={["violet"]}
+                  valueFormatter={valueFormatter}
+                  showAnimation={true}/>
+                </TabPanel>
+                <TabPanel> 
+                  <BarChart 
+                  className='h-64 screen2:h-[360px]'
+                  data={barChartData}
+                  index="name"
+                  categories={["Daily Revenue"]}
+                  colors={["violet"]}
+                  valueFormatter={valueFormatter}
+                  showAnimation={true}/>
+                </TabPanel>
+                <TabPanel> 
+                  <BarChart 
+                  className='h-64 screen2:h-[360px]'
+                  data={barChartData}
+                  index="name"
+                  categories={["Daily Revenue"]}
+                  colors={["violet"]}
+                  valueFormatter={valueFormatter}
+                  showAnimation={true}/>
+                </TabPanel>
+                <TabPanel>
+                  <BarChart 
+                  className='h-64 screen2:h-[360px]'
+                  data={barChartData}
+                  index="name"
+                  categories={["Daily Revenue"]}
+                  colors={["violet"]}
+                  valueFormatter={valueFormatter}
+                  showAnimation={true}/>
+                </TabPanel>
+                <TabPanel> 
                   <BarChart 
                   className='h-64 screen2:h-[360px]'
                   data={barChartData}
