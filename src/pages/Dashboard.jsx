@@ -121,10 +121,14 @@ export default function Dashboard() {
     }  
 
     const [revGoal, setrevGoal] = useState('')
+    
 
     const handleInputText = (e) => {
-      setrevGoal(e.target.value)
-    }
+      const inputValue = e.target.value.replace(/[^0-9]/g, ''); 
+      const convertedRev = new Intl.NumberFormat().format(Number(inputValue));
+      setrevGoal(convertedRev);
+    };
+
 
   return (
     <div className='dark'>
@@ -195,8 +199,8 @@ export default function Dashboard() {
                   <Text>{leftCards.metric}</Text>
                   <Text>£{revGoal}</Text>
                 </Flex>
-                <ProgressBar color='purple'/>
-                <TextInput placeholder='Set your goal' type='text' value={revGoal} onChange={handleInputText}/>
+                <ProgressBar value={87} color='violet' showAnimation={true}/>
+                <TextInput type='text' placeholder='Set your goal' value={revGoal} onChange={handleInputText}/>
             </Card>
           </Grid>
         </div>
