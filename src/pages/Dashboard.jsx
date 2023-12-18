@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import { LineChart, Card, Metric, Text, Title, Col, Grid, BadgeDelta, Flex, DonutChart, BarChart, TabGroup, TabList, Tab, TabPanels, TabPanel, ProgressBar, TextInput} from '@tremor/react'
+import { LineChart, Card, Metric, Text, Title, Col, Grid, BadgeDelta, Flex, DonutChart, BarChart, TabGroup, TabList, Tab, TabPanels, TabPanel, ProgressCircle, TextInput} from '@tremor/react'
 import { barChartData } from './barChartData';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 export default function Dashboard() {
@@ -181,7 +183,7 @@ export default function Dashboard() {
           </Card>
         </div>
         <div className='p-12'>
-          <Grid numItems={2}>
+          <Grid numItems={2} className='gap-10'>
             <Card >
               <Title>Top Performing SKUs</Title>
                 <DonutChart 
@@ -194,13 +196,19 @@ export default function Dashboard() {
                 showAnimation={true}
                 />
             </Card>
-            <Card>
-                <Flex>
-                  <Text>{leftCards.metric}</Text>
-                  <Text>£{revGoal}</Text>
-                </Flex>
-                <ProgressBar value={87} color='violet' showAnimation={true}/>
-                <TextInput type='text' placeholder='Set your goal' value={revGoal} onChange={handleInputText}/>
+            <Card className='flex flex-col justify-center'>
+                <Text className='mb-8' color='white'>2023 Revenue Goal: £{revGoal}</Text>
+                <ProgressCircle radius={100} strokeWidth={19} value={87} color='violet' showAnimation={true}>
+                  <span className='text-white'>
+                    {leftCards.metric}
+                  </span>
+                </ProgressCircle>
+                <div className='flex flex-row mt-10'>
+                  <TextInput className='inline w-11/12 mr-2' type='text' placeholder='Set your goal' value={revGoal} onChange={handleInputText}/>
+                  <button className='inline h-9 w-6 rounded-md bg-accent'>
+                  <FontAwesomeIcon icon={faCheck} className='text-white'/>
+                  </button>
+                </div>
             </Card>
           </Grid>
         </div>
