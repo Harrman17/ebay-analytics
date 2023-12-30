@@ -60,8 +60,8 @@ export default function Dashboard() {
 
     const leftCards = {
         title: "2023 Revenue",
-        metric: "£42,170.21",
-        metricPrev: "£39,874.78",
+        metric: 42170.21,
+        metricPrev: 39874.78,
         delta: "+7.66%",
         deltaType: "moderateIncrease",
       }
@@ -122,15 +122,29 @@ export default function Dashboard() {
     }
     }  
 
-    const [revGoal, setrevGoal] = useState('')
-    
+    const [revGoal, setrevGoal] = useState()
 
     const handleInputText = (e) => {
-      const inputValue = e.target.value.replace(/[^0-9]/g, ''); 
-      const convertedRev = new Intl.NumberFormat().format(Number(inputValue));
-      setrevGoal(convertedRev);
+      let inputValue = e.target.value.replace(/[^0-9]/g, ''); // ensures no letters are inputted
+      if (inputValue <= 2000000) {
+      setrevGoal(inputValue);
+      }
     };
 
+    const [percentageAchieved, setPercentageAchieved] = useState(0)
+
+    const calcGoalPercentage = () => {
+      const actualAmount = leftCards.metric
+      const revGoalNumber = parseInt(revGoal)
+      setPercentageAchieved(actualAmount/revGoalNumber*100)
+    }
+
+    const personalValueFormatter = (value)  => {
+      return new Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: "GBP"
+      }).format(value)
+    }
 
   return (
     <div className='dark'>
@@ -143,8 +157,8 @@ export default function Dashboard() {
                   <BadgeDelta deltaType={leftCards.deltaType}>{leftCards.delta}</BadgeDelta>
                 </Flex>
                 <Flex justifyContent='start' alignItems='baseline' className='truncate space-x-6"'>
-                  <Metric>{leftCards.metric}</Metric>
-                  <Text className='truncate ml-2'>from {leftCards.metricPrev}</Text>
+                  <Metric>{personalValueFormatter(leftCards.metric)}</Metric>
+                  <Text className='truncate ml-2'>from {personalValueFormatter(leftCards.metricPrev)}</Text>
                 </Flex>
               </Card>
           </Col> 
@@ -198,14 +212,14 @@ export default function Dashboard() {
             </Card>
             <Card className='flex flex-col justify-center'>
                 <Text className='mb-8' color='white'>2023 Revenue Goal: £{revGoal}</Text>
-                <ProgressCircle radius={100} strokeWidth={19} value={87} color='violet' showAnimation={true}>
+                <ProgressCircle radius={100} strokeWidth={19} value={percentageAchieved} color='violet' showAnimation={true}>
                   <span className='text-white'>
-                    {leftCards.metric}
+                    {personalValueFormatter(leftCards.metric)}
                   </span>
                 </ProgressCircle>
                 <div className='flex flex-row mt-10'>
                   <TextInput className='inline w-11/12 mr-2' type='text' placeholder='Set your goal' value={revGoal} onChange={handleInputText}/>
-                  <button className='inline h-9 w-6 rounded-md bg-accent'>
+                  <button className='inline h-9 w-6 rounded-md bg-accent' onClick={calcGoalPercentage}>
                   <FontAwesomeIcon icon={faCheck} className='text-white'/>
                   </button>
                 </div>
