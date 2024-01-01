@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useState, useEffect} from 'react'
 import { LineChart, Card, Metric, Text, Title, Col, Grid, BadgeDelta, Flex, DonutChart, BarChart, TabGroup, TabList, Tab, TabPanels, TabPanel, ProgressCircle, TextInput} from '@tremor/react'
 import { barChartData } from './barChartData';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -123,11 +123,12 @@ export default function Dashboard() {
     }  
 
     const [revGoal, setrevGoal] = useState()
+    const [displayedGoal, setDisplayedGoal] = useState(0)
 
     const handleInputText = (e) => {
-      let inputValue = e.target.value.replace(/[^0-9]/g, ''); // ensures no letters are inputted
+      let inputValue = e.target.value.replace(/[^0-9]/g, '') //ensures no letters are inputted
       if (inputValue <= 2000000) {
-      setrevGoal(inputValue);
+      setrevGoal(inputValue)
       }
     };
 
@@ -137,6 +138,7 @@ export default function Dashboard() {
       const actualAmount = leftCards.metric
       const revGoalNumber = parseInt(revGoal)
       setPercentageAchieved(actualAmount/revGoalNumber*100)
+      setDisplayedGoal(revGoal)
     }
 
     const personalValueFormatter = (value)  => {
@@ -145,6 +147,11 @@ export default function Dashboard() {
         currency: "GBP"
       }).format(value)
     }
+
+    useEffect(() => {
+      setrevGoal('')
+    }, [displayedGoal])
+
 
   return (
     <div className='dark'>
@@ -211,7 +218,7 @@ export default function Dashboard() {
                 />
             </Card>
             <Card className='flex flex-col justify-center'>
-                <Text className='mb-8' color='white'>2023 Revenue Goal: £{revGoal}</Text>
+                <Text className='mb-8' color='white'>2023 Revenue Goal: {personalValueFormatter(displayedGoal)}</Text>
                 <ProgressCircle radius={100} strokeWidth={19} value={percentageAchieved} color='violet' showAnimation={true}>
                   <span className='text-white'>
                     {personalValueFormatter(leftCards.metric)}
