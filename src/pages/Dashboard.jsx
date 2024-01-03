@@ -203,12 +203,12 @@ export default function Dashboard() {
             />
           </Card>
         </div>
-        <div className='p-12'>
+        <div className='screen2:p-12 screen1:pl-12 screen1:-mt-2'>
           <Grid numItems={2} className='gap-10'>
             <Card >
               <Title>Top Performing SKUs</Title>
                 <DonutChart 
-                className='mt-6 screen2:h-60'
+                className='mt-8 screen2:h-60 screen1:h-52'
                 data={donutChartData}  
                 category="Sales"
                 index='SKU'
@@ -221,10 +221,10 @@ export default function Dashboard() {
                 <Text className='mb-8' color='white'>2023 Revenue Goal: {personalValueFormatter(displayedGoal)}</Text>
                 <ProgressCircle radius={100} strokeWidth={19} value={percentageAchieved} color='violet' showAnimation={true}>
                   <span className='text-white'>
-                    {personalValueFormatter(leftCards.metric)}
+                    {Math.round(percentageAchieved)}%
                   </span>
                 </ProgressCircle>
-                <div className='flex flex-row mt-10'>
+                <div className='flex flex-row screen2:mt-10 screen1:mt-4'>
                   <TextInput className='inline w-11/12 mr-2' type='text' placeholder='Set your goal' value={revGoal} onChange={handleInputText}/>
                   <button className='inline h-9 w-6 rounded-md bg-accent' onClick={calcGoalPercentage}>
                   <FontAwesomeIcon icon={faCheck} className='text-white'/>
