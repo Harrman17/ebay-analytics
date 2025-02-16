@@ -21,7 +21,6 @@ export default function App() {
     password: ""
   })
  
-  //we're scrapping all this authentication shit now lets move onto using papaparse and getting this dashboard setup, no point in wasting time in this broken project, need to move on. ALL PROJECTS WON'T BE PERFECT
 
   return (
     <div>
